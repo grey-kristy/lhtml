@@ -1,4 +1,4 @@
 lhtml
 =====
 
-Simple HTML DSL for erlang
+SimpLe HTML DSL for erlang
