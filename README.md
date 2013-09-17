@@ -1,7 +1,7 @@
 lhtml
 =====
 
-SimpLe HTML DSL for erlang
+Very simpLe HTML DSL for erlang
 
 
 ```erlang
