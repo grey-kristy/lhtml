@@ -5,6 +5,7 @@
 -export([p/1, p/2, hdiv/1, hdiv/2, span/1, span/2, footer/1, footer/2]).
 -export([table/1, table/2, caption/1, caption/2, th/1, th/2, td/1, td/2, tr/1, tr/2]).
 -export([img/1, img/2, a/2, a/3]).
+-export([input/1, form/2, label/2]).
 
 
 tag(Tag, Msg, Opts) when is_integer(Msg) -> tag(Tag, integer_to_list(Msg), Opts);
@@ -30,6 +31,7 @@ format_opt({Key, Val}) -> io_lib:format(" ~p=\"~ts\"", [Key, Val]).
 tag_type('div') -> hdiv;
 tag_type(link) -> void;
 tag_type(img) -> void;
+tag_type(input) -> void;
 tag_type(_) -> full.
 
 
@@ -83,4 +85,9 @@ img(Src, Opts) -> tag(img, "", [{src, Src}] ++ Opts).
 
 a(Href, Msg) -> a(Href, Msg, []).
 a(Href, Msg, Opts) -> tag(a, Msg, [{href, Href}] ++ Opts).
+
+form(Msg, Opts) -> tag(form, Msg, Opts).
+label(Msg, Opts) -> tag(label, Msg, Opts).
+
+input(Opts) -> tag(input, "", Opts).
 
