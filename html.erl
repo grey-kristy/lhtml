@@ -1,11 +1,13 @@
 -module(html).
 
 -export([html/2, html/1, head/1, title/1, body/2, body/1, hlink/1]).
--export([h1/1, h1/2, h2/1, h2/2, h3/1, h3/2]).
+-export([h1/1, h1/2, h2/1, h2/2, h3/1, h3/2, h4/1, h4/2]).
 -export([p/1, p/2, hdiv/1, hdiv/2, span/1, span/2, footer/1, footer/2]).
+-export([strong/1, strong/2]).
+-export([ul/1, ul/2, li/1, li/2]).
 -export([table/1, table/2, caption/1, caption/2, th/1, th/2, td/1, td/2, tr/1, tr/2]).
 -export([img/1, img/2, a/2, a/3]).
--export([input/1, form/2, label/2]).
+-export([input/1, form/1, form/2, label/2]).
 
 
 tag(Tag, Msg, Opts) when is_number(Msg) ->
@@ -50,6 +52,9 @@ h2(Msg, Opts) -> tag(<<"h2">>, Msg, Opts).
 h3(Msg) -> tag(<<"h3">>, Msg, []).
 h3(Msg, Opts) -> tag(<<"h3">>, Msg, Opts).
 
+h4(Msg) -> tag(<<"h4">>, Msg, []).
+h4(Msg, Opts) -> tag(<<"h4">>, Msg, Opts).
+
 p(Msg) -> tag(<<"p">>, Msg, []).
 p(Msg, Opts) -> tag(<<"p">>, Msg, Opts).
 
@@ -61,6 +66,15 @@ span(Msg, Opts) -> tag(<<"span">>, Msg, Opts).
 
 footer(Msg) -> tag(<<"footer">>, Msg, []).
 footer(Msg, Opts) -> tag(<<"footer">>, Msg, Opts).
+
+strong(Msg) -> tag(<<"strong">>, Msg, []).
+strong(Msg, Opts) -> tag(<<"strong">>, Msg, Opts).
+
+ul(Msg) -> tag(<<"ul">>, Msg, []).
+ul(Msg, Opts) -> tag(<<"ul">>, Msg, Opts).
+
+li(Msg) -> tag(<<"li">>, Msg, []).
+li(Msg, Opts) -> tag(<<"li">>, Msg, Opts).
 
 table(Msg) -> tag(<<"table">>, Msg, []).
 table(Msg, Opts) -> tag(<<"table">>, Msg, Opts).
@@ -85,6 +99,7 @@ a(Href, Msg) -> a(Href, Msg, []).
 a(Href, Msg, Opts) when is_tuple(Opts) -> tag(<<"a">>, Msg, [{href, Href}] ++ [Opts]);
 a(Href, Msg, Opts) -> tag(<<"a">>, Msg, [{href, Href}] ++ Opts).
 
+form(Msg) -> tag(<<"form">>, Msg, []).
 form(Msg, Opts) -> tag(<<"form">>, Msg, Opts).
 label(Msg, Opts) -> tag(<<"label">>, Msg, Opts).
 
