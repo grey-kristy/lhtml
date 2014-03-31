@@ -8,6 +8,7 @@
 -export([table/1, table/2, caption/1, caption/2, th/1, th/2, td/1, td/2, tr/1, tr/2]).
 -export([img/1, img/2, a/2, a/3]).
 -export([input/1, form/1, form/2, label/2]).
+-export([script/2]).
 
 
 tag(Tag, Msg, Opts) when is_number(Msg) ->
@@ -105,6 +106,7 @@ label(Msg, Opts) -> tag(<<"label">>, Msg, Opts).
 
 input(Opts) -> tag(<<"input">>, <<"">>, Opts).
 
+script(Msg, Opts) -> tag(<<"script">>, Msg, Opts).
 
 to_bin(Bin) when is_binary(Bin) -> Bin;
 to_bin(Atom) when is_atom(Atom) -> list_to_binary(atom_to_list(Atom));
