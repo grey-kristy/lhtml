@@ -7,8 +7,8 @@
 -export([ul/1, ul/2, li/1, li/2]).
 -export([table/1, table/2, caption/1, caption/2, th/1, th/2, td/1, td/2, tr/1, tr/2]).
 -export([img/1, img/2, a/2, a/3]).
--export([input/1, form/1, form/2, label/2]).
--export([script/2]).
+-export([input/1, form/1, form/2, label/2, button/1, button/2]).
+-export([script/1, script/2]).
 
 
 tag(Tag, Msg, Opts) when is_number(Msg) ->
@@ -19,6 +19,7 @@ tag(Tag, Msg, Opts) when is_atom(Msg) ->
 tag(Tag, Msg, Opts) ->
     case tag_type(Tag) of
         void -> [$<, Tag, cook_opts(Opts), "/>\n"];
+        big  -> [$<, Tag, cook_opts(Opts), ">\n", Msg, "</", Tag, ">\n"];
         _    -> [$<, Tag, cook_opts(Opts), $>, Msg, "</", Tag, ">\n"]
     end.
 
@@ -27,10 +28,14 @@ cook_opts(Opts) when is_tuple(Opts) ->
 cook_opts(Opts) ->
     [[$\s, to_bin(Key), $=, $", to_bin(Val), $"] || {Key, Val} <- Opts].
 
-tag_type(<<"link">>) -> void;
-tag_type(<<"img">>) -> void;
+tag_type(<<"link">>)  -> void;
+tag_type(<<"img">>)   -> void;
 tag_type(<<"input">>) -> void;
-tag_type(_) -> full.
+tag_type(<<"html">>)  -> big;
+tag_type(<<"head">>)  -> big;
+tag_type(<<"body">>)  -> big;
+tag_type(<<"form">>)  -> big;
+tag_type(_)           -> full.
 
 %% API
 
@@ -77,6 +82,9 @@ ul(Msg, Opts) -> tag(<<"ul">>, Msg, Opts).
 li(Msg) -> tag(<<"li">>, Msg, []).
 li(Msg, Opts) -> tag(<<"li">>, Msg, Opts).
 
+button(Msg) -> tag(<<"button">>, Msg, []).
+button(Msg, Opts) -> tag(<<"button">>, Msg, Opts).
+
 table(Msg) -> tag(<<"table">>, Msg, []).
 table(Msg, Opts) -> tag(<<"table">>, Msg, Opts).
 
@@ -106,6 +114,7 @@ label(Msg, Opts) -> tag(<<"label">>, Msg, Opts).
 
 input(Opts) -> tag(<<"input">>, <<"">>, Opts).
 
+script(Msg) -> tag(<<"script">>, Msg, []).
 script(Msg, Opts) -> tag(<<"script">>, Msg, Opts).
 
 to_bin(Bin) when is_binary(Bin) -> Bin;
