@@ -7,7 +7,7 @@
 -export([ul/1, ul/2, li/1, li/2]).
 -export([table/1, table/2, caption/1, caption/2, th/1, th/2, td/1, td/2, tr/1, tr/2]).
 -export([img/1, img/2, a/2, a/3]).
--export([input/1, form/1, form/2, label/2, button/1, button/2]).
+-export([input/1, form/1, form/2, label/2, button/1, button/2, textarea/1, textarea/2]).
 -export([script/1, script/2]).
 
 
@@ -113,6 +113,9 @@ form(Msg, Opts) -> tag(<<"form">>, Msg, Opts).
 label(Msg, Opts) -> tag(<<"label">>, Msg, Opts).
 
 input(Opts) -> tag(<<"input">>, <<"">>, Opts).
+
+textarea(Msg) -> tag(<<"textarea">>, Msg, []).
+textarea(Msg, Opts) -> tag(<<"textarea">>, Msg, Opts).
 
 script(Msg) -> tag(<<"script">>, Msg, []).
 script(Msg, Opts) -> tag(<<"script">>, Msg, Opts).
